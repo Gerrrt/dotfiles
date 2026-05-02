@@ -1,0 +1,89 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Insert blank line between shell prompts
+add_newline = true
+command_timeout = 1000
+format = """
+$os\
+$username\
+$hostname\
+$kubernetes\
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$python\
+$lua\
+$nodejs\
+$docker_context\
+$jobs\
+$cmd_duration\
+$line_break\
+$character"""
+
+[character]
+success_symbol = '[➜](bold green)'
+
+[os]
+format = '[$symbol]($style) '
+style = 'bg:red fg:bright_purple'
+disabled = false
+
+[os.symbols]
+Windows = ""
+Ubuntu = "󰕈"
+Macos = "󰀵"
+
+[username]
+style_user = 'white bold'
+style_root = 'black bold'
+format = '[$user]($style) '
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = ' [$hostname](bold yellow) '
+disabled = false
+
+[directory]
+truncation_length = 1
+truncation_symbol = '../'
+style = 'bold fg:bright_blue'
+format = ' [$path ]($style) '
+
+[directory.substitutions]
+"Documents" = " 󰈙 "
+"Downloads" = "  "
+"Music" = " 󰝚 "
+"Pictures" = "  "
+"Developer" = " 󰲋 "
+
+[git_branch]
+symbol = ""
+truncation_symbol = '../'
+format = ' [on](white) [$symbol$branch ]($style) '
+style = 'bold green'
+
+[git_status]
+style = 'red'
+format = ' ([$all_status$ahead_behind]($style) ) '
+
+[palettes.cyberdyne]
+black='#080808'
+red='#FF8373'
+green='#00C172'
+yellow='#D2A700'
+blue='#0071CF'
+purple='#FF90FE'
+cyan='#6BFFDD'
+white='#F1F1F1'
+bright_black='#484848'
+bright_red='#FFC4BE'
+bright_green='#D6FCBA'
+bright_yellow='#FFFED5'
+bright_blue='#C2E3FF'
+bright_purple='#FFB2FE'
+bright_cyan='#E6E7FE'
+bright_white='#FFFFFF'
