@@ -1,18 +1,24 @@
-# Schema
+# Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Give the palette a name
 palette = 'cyberdyne'
 
-# Insert Blank Line Between Shell Prompts
+# Insert blank line between shell prompts
 add_newline = true
 
+# Set timeout for command
 command_timeout = 1000
+
+# Set timeout for scan
 scan_timeout = 35
 
+# Format right side of the terminal
 right_format = ""
 
+# Format the prompt
 format = """
-[](white)\
+[](bg:white fg:black)\
 $os\
 [](bg:red fg:white)\
 $hostname\
@@ -36,7 +42,7 @@ $package\
 $docker_context\
 [](fg:magenta)\
 $fill\
-[](cyan)\
+[](bg:cyan fg:black)\
 $time\
 [](fg:cyan bg:blue)\
 $battery\
@@ -51,7 +57,7 @@ $line_break\
 $character"""
 
 [os]
-format = '[$symbol ]($style)'
+format = '[ $symbol ]($style)'
 style = 'bg:white fg:black'
 disabled = false
 
@@ -82,11 +88,11 @@ Pop = ""
 ssh_only = false
 format = '[ $hostname ]($style)'
 disabled = false
-style = 'bg:red fg:white'
+style = 'bg:red fg:black'
 
 [username]
-style_user = 'bg:orange fg:red'
-style_root = 'bg:orange fg:red'
+style_user = 'bg:orange fg:black'
+style_root = 'bg:orange fg:black'
 format = '[ $user ]($style)'
 disabled = false
 show_always = true
@@ -94,17 +100,17 @@ show_always = true
 [directory]
 truncation_length = 3
 truncation_symbol = '../'
-style = 'bg:yellow fg:orange'
+style = 'bg:yellow fg:black'
 format = '[ $path ]($style)'
 truncate_to_repo = false
 
 [directory.substitutions]
-"Documents" = " 󰈙 "
-"Downloads" = "  "
-"Music" = " 󰝚 "
-"Pictures" = "  "
-"Developer" = " 󰲋 "
-"Code" = "󰲋 "
+"Documents" = "󰈙"
+"Downloads" = ""
+"Music" = "󰝚"
+"Pictures" = ""
+"Developer" = "󰲋"
+"Code" = "󰲋"
 
 [git_branch]
 symbol = ""
@@ -113,7 +119,7 @@ style = 'bg:green fg:yellow'
 
 [git_status]
 style = 'bg:green fg:yellow'
-format = '([$all_status$ahead_behind ]($style))'
+format = '([ $all_status $ahead_behind ]($style))'
 conflicted = '[conflicted=${count}](red)'
 up_to_date = '[up-to-date](green)'
 untracked = '[untracked=${count}](red)'
@@ -128,11 +134,11 @@ deleted = '[deleted=${count}](red)'
 
 [git_state]
 style = 'bg:green fg:yellow'
-format = '[ $state( $progress_current/$progress_total) ]($style)'
+format = '[ $state ($progress_current/$progress_total) ]($style)'
 
 [git_metrics]
 disabled = false
-format = '[[+$added]($added_style)/[-$deleted]($deleted_style) ]'
+format = '[[ +$added ] ($added_style) / [ -$deleted ] ($deleted_style) ]'
 
 [python]
 style = 'bg:cyan fg:green'
@@ -140,7 +146,7 @@ symbol = ' '
 format = '[ $symbol ($version) ]($style)'
 
 [lua]
-format = '[$symbol($version)]($style)'
+format = '[ $symbol ($version) ]($style)'
 symbol = ' '
 style = 'bg:cyan fg:green'
 
@@ -165,14 +171,14 @@ format = '[ $symbol $version ]($style)'
 [docker_context]
 symbol = ' '
 style = 'bg:magenta fg:blue'
-format = '[$symbol]($style)$path'
+format = '[ $symbol ]($style)$path'
 detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
 detect_extensions = ['Dockerfile']
 
 [time]
 disabled = false
 time_format = "%R"
-style = 'bg:cyan fg:green'
+style = 'bg:cyan fg:black'
 format = '[ 󰥔  $time ]($style)'
 
 [battery]
@@ -182,29 +188,29 @@ charging_symbol = "󰂄"
 discharging_symbol = "󰂃"
 unknown_symbol = "󰁽"
 empty_symbol = "󰂎"
-format = "[[ $symbol ](fg:cyan bg:blue)]($style)"
+format = "[[ $symbol ](fg:black bg:blue)]($style)"
 
 [[battery.display]]
 threshold = 100
-style = 'bg:blue fg:cyan'
+style = 'bg:blue fg:black'
 
 [cmd_duration]
 min_time = 500
-style = 'bg:magenta fg:blue'
-format = '[$duration]($style)'
+style = 'bg:magenta fg:black'
+format = '[ $duration ]($style)'
 
 [status]
 disabled = false
-style = "bg:purple fg:magenta"
-format = '[ ✖ $status ]($style)'
+style = "bg:purple fg:black"
+format = '[ ✖  $status ]($style)'
 map_symbol = true
 recognize_signal_code = true
 
 [jobs]
 symbol = ' '
-style = 'bg:black fg:purple'
+style = 'bg:black fg:white'
 number_threshold = 1
-format = '[$symbol]($style)'
+format = '[ $symbol ]($style)'
 
 [line_break]
 disabled = false
