@@ -1,0 +1,33 @@
+# Theme
+theme = Cyberdyne
+background = #151144
+selection-foreground = 
+selection-background = #454D96
+
+# Font
+font-family = 'CaskaydiaCove Nerd Font'
+font-size = 16
+font-thicken = true
+font-thicken-strength = 100
+font-feature = +ligatures
+
+# Cursor
+cursor-style = block
+cursor-style-blink = true
+cursor-color = #00FF9C
+mouse-hide-while-typing = true
+
+# Window
+macos-titlebar-style =
+window-save-state = always
+maximize = true
+confirm-close-surface = false
+quick-terminal-position = center
+
+# Padding (left, right, top, bottom → x/y in Ghostty)
+window-padding-x =
+window-padding-y =
+
+# Keybinds (Ctrl+Enter / Shift+Enter CSI u sequences)
+keybind = ctrl+enter=text:\x1b[13;5u
+keybind = shift+enter=text:\x1b[13;2u
