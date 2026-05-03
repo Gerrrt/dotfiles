@@ -1,57 +1,102 @@
-# Get editor completions based on the config schema
+# Schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Insert blank line between shell prompts
+palette = 'cyberdyne'
+
+# Insert Blank Line Between Shell Prompts
 add_newline = true
+
 command_timeout = 1000
+scan_timeout = 35
+
+right_format = ""
+
 format = """
+[](white)\
 $os\
-$username\
+[](bg:red fg:white)\
 $hostname\
-$kubernetes\
+[](fg:red bg:orange)\
+$username\
+[](fg:orange bg:yellow)\
 $directory\
+[](fg:yellow bg:green)\
 $git_branch\
 $git_status\
-$fill\
+$git_state\
+$git_metrics\
+[](fg:green bg:cyan)\
 $python\
 $lua\
 $nodejs\
+$rust\
+[](fg:cyan bg:blue)\
+$package\
+[](fg:blue bg:magenta)\
 $docker_context\
-$jobs\
+[](fg:magenta)\
+$fill\
+[](cyan)\
+$time\
+[](fg:cyan bg:blue)\
+$battery\
+[](fg:blue bg:magenta)\
 $cmd_duration\
+[](fg:magenta bg:purple)\
+$status\
+[](fg:purple bg:black)\
+$jobs\
+[](fg:black)\
 $line_break\
 $character"""
 
-[character]
-success_symbol = '[➜](bold green)'
-
 [os]
-format = '[$symbol]($style) '
-style = 'bg:red fg:bright_purple'
+format = '[$symbol ]($style)'
+style = 'bg:white fg:black'
 disabled = false
 
 [os.symbols]
 Windows = ""
 Ubuntu = "󰕈"
 Macos = "󰀵"
-
-[username]
-style_user = 'white bold'
-style_root = 'black bold'
-format = '[$user]($style) '
-disabled = false
-show_always = true
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+EndeavourOS = ""
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+Pop = ""
 
 [hostname]
 ssh_only = false
-format = ' [$hostname](bold yellow) '
+format = '[ $hostname ]($style)'
 disabled = false
+style = 'bg:red fg:white'
+
+[username]
+style_user = 'bg:orange fg:red'
+style_root = 'bg:orange fg:red'
+format = '[ $user ]($style)'
+disabled = false
+show_always = true
 
 [directory]
-truncation_length = 1
+truncation_length = 3
 truncation_symbol = '../'
-style = 'bold fg:bright_blue'
-format = ' [$path ]($style) '
+style = 'bg:yellow fg:orange'
+format = '[ $path ]($style)'
+truncate_to_repo = false
 
 [directory.substitutions]
 "Documents" = " 󰈙 "
@@ -59,16 +104,119 @@ format = ' [$path ]($style) '
 "Music" = " 󰝚 "
 "Pictures" = "  "
 "Developer" = " 󰲋 "
+"Code" = "󰲋 "
 
 [git_branch]
 symbol = ""
-truncation_symbol = '../'
-format = ' [on](white) [$symbol$branch ]($style) '
-style = 'bold green'
+format = '[ $symbol $branch ]($style)'
+style = 'bg:green fg:yellow'
 
 [git_status]
-style = 'red'
-format = ' ([$all_status$ahead_behind]($style) ) '
+style = 'bg:green fg:yellow'
+format = '([$all_status$ahead_behind ]($style))'
+conflicted = '[conflicted=${count}](red)'
+up_to_date = '[up-to-date](green)'
+untracked = '[untracked=${count}](red)'
+ahead = 'ahead=${count}'
+diverged = 'ahead=${ahead_count} behind=${behind_count}'
+behind = 'behind=${count}'
+stashed = '[stashed=${count}](green)'
+modified = '[modified=${count}](yellow)'
+staged = '[staged=${count}](green)'
+renamed = '[renamed=${count}](yellow)'
+deleted = '[deleted=${count}](red)'
+
+[git_state]
+style = 'bg:green fg:yellow'
+format = '[ $state( $progress_current/$progress_total) ]($style)'
+
+[git_metrics]
+disabled = false
+format = '[[+$added]($added_style)/[-$deleted]($deleted_style) ]'
+
+[python]
+style = 'bg:cyan fg:green'
+symbol = ' '
+format = '[ $symbol ($version) ]($style)'
+
+[lua]
+format = '[$symbol($version)]($style)'
+symbol = ' '
+style = 'bg:cyan fg:green'
+
+[nodejs]
+style = 'bg:cyan fg:green'
+symbol = ' '
+
+[rust]
+style = 'bg:cyan fg:green'
+symbol = ' '
+
+[ruby]
+style = 'bg:cyan fg:green'
+symbol = ' '
+
+[package]
+symbol = '󰏗 '
+disabled = false
+style = 'bg:blue fg:cyan'
+format = '[ $symbol $version ]($style)'
+
+[docker_context]
+symbol = ' '
+style = 'bg:magenta fg:blue'
+format = '[$symbol]($style)$path'
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+detect_extensions = ['Dockerfile']
+
+[time]
+disabled = false
+time_format = "%R"
+style = 'bg:cyan fg:green'
+format = '[ 󰥔  $time ]($style)'
+
+[battery]
+disabled = false
+full_symbol = "󰁹"
+charging_symbol = "󰂄"
+discharging_symbol = "󰂃"
+unknown_symbol = "󰁽"
+empty_symbol = "󰂎"
+format = "[[ $symbol ](fg:cyan bg:blue)]($style)"
+
+[[battery.display]]
+threshold = 100
+style = 'bg:blue fg:cyan'
+
+[cmd_duration]
+min_time = 500
+style = 'bg:magenta fg:blue'
+format = '[$duration]($style)'
+
+[status]
+disabled = false
+style = "bg:purple fg:magenta"
+format = '[ ✖ $status ]($style)'
+map_symbol = true
+recognize_signal_code = true
+
+[jobs]
+symbol = ' '
+style = 'bg:black fg:purple'
+number_threshold = 1
+format = '[$symbol]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[](bold fg:green)'
+error_symbol = '[](bold fg:red)'
+vimcmd_symbol = '[](bold fg:green)'
+vimcmd_replace_one_symbol = '[](bold fg:purple)'
+vimcmd_replace_symbol = '[](bold fg:purple)'
+vimcmd_visual_symbol = '[](bold fg:yellow)'
 
 [palettes.cyberdyne]
 black='#080808'
@@ -76,9 +224,11 @@ red='#FF8373'
 green='#00C172'
 yellow='#D2A700'
 blue='#0071CF'
-purple='#FF90FE'
+magenta='#FF90FE'
 cyan='#6BFFDD'
 white='#F1F1F1'
+orange='#FF4D00'
+bright_orange='#F28444'
 bright_black='#484848'
 bright_red='#FFC4BE'
 bright_green='#D6FCBA'
@@ -87,3 +237,5 @@ bright_blue='#C2E3FF'
 bright_purple='#FFB2FE'
 bright_cyan='#E6E7FE'
 bright_white='#FFFFFF'
+background='#151144'
+foreground='#00ff92'
